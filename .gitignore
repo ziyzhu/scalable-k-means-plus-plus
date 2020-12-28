@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# build
+obj32
+obj64
