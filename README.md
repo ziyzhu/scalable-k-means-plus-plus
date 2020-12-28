@@ -1,6 +1,6 @@
 # scalable-k-means-plus-plus
 
-[Stanford Scalable Kmeans||](see https://arxiv.org/abs/1203.6402) implementation in C++
+[Stanford Scalable Kmeans||](https://arxiv.org/abs/1203.6402) implementation in C++
 
 # Files
 
