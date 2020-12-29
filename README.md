@@ -1,4 +1,4 @@
-# scalable-k-means-plus-plus
+# Scalable-K-Means-plus-plus
 
 [Stanford Scalable Kmeans||](https://arxiv.org/abs/1203.6402) implementation in C++
 
