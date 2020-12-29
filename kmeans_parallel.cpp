@@ -60,15 +60,6 @@ public:
             square_total += diff * diff;
         }
         return sqrt(square_total);
-
-        /*
-        double square_total = 0;
-        for (int i = 0; i < total_values; ++i) {
-            double diff = this->values[i] - endpoint.values[i];
-            square_total += diff * diff;
-        }
-        return sqrt(square_total);
-        */
     }
 
 	int getID() {
@@ -293,35 +284,6 @@ public:
             phase2B_total += (double) chrono::duration_cast<std::chrono::microseconds>(phase2C - phase2B).count();
         }
 
-        /*
-        for (int i = 0; i < psi_int; ++i) {
-            int psi_arr[X.size()];
-            for (int j = 0; j < X.size(); ++j) {
-                double min = numeric_limits<double>::max();
-                for (int z = 0; z < C.size(); ++z) {
-                    double d = X[j].distance(C[z]);
-                    if (min > d * d) min = d * d;
-                }
-                psi_arr[j] = min;
-            }
-
-            double phi_c = 0;
-            for (int j = 0; j < X.size(); ++j) phi_c += psi_arr[j];
-            for (int j = 0; j < X.size(); ++j) {
-                double prob_x = oversampling_factor * psi_arr[j] / phi_c;
-                double rand_num = rand_vec[j];
-                if (prob_x >= rand_num) {
-                    C.push_back(X[j]);
-                    X.erase(X.begin() + j);
-                }
-            }
-        }
-        */
-        
-        //cout << endl;
-        //cout << "log(psi): " << psi_int << endl;
-        //cout << "C size: " << C.size() << endl;
-        //cout << "X size: " << X.size() << endl;
         auto phase3 = chrono::high_resolution_clock::now();
 
         tbb::concurrent_vector<int> min_indices;
@@ -471,56 +433,6 @@ public:
 
 		while(true) {
 			bool done = true;
-
-			// associates each point to the nearest center
-            /*
-            double ERROR_THRESHHOLD = 0.1;
-            int ca = 0;
-            int cb = 0;
-            for (size_t i = 0; i < total_points; ++i)
-            {
-               int id_old_cluster = points[i].getCluster();
-               int id_nearest_cluster = getIDNearestCenter(points[i]);
-               if(id_old_cluster != id_nearest_cluster)
-               {
-                   ca++;
-                   if(id_old_cluster != -1) {
-                       double olddist = clusters[id_old_cluster].distance(points[i]);
-                       double newdist = clusters[id_nearest_cluster].distance(points[i]);
-                       double error = olddist - newdist;
-                       cout << "Error: " << error << endl;
-                       if (error < ERROR_THRESHHOLD) {
-                           cb++;
-                           continue;
-                       }
-                   }
-
-                   if(id_old_cluster != -1)
-                       clusters[id_old_cluster].removePoint(points[i].getID());
-
-                   points[i].setCluster(id_nearest_cluster);
-                   clusters[id_nearest_cluster].addPoint(points[i]);
-                   done = false;
-               }
-            }
-
-            cout << "ca: " << ca << endl;
-            cout << "cb: " << cb << endl;
-
-            // recalculating the center of each cluster
-            for(int i = 0; i < K; i++) {
-                for(int j = 0; j < total_values; j++) {
-                    int total_points_cluster = clusters[i].getTotalPoints();
-                    double sum = 0.0;
-
-                    if(total_points_cluster > 0) {
-                        for(int p = 0; p < total_points_cluster; p++)
-                            sum += clusters[i].getPoint(p).getValue(j);
-                        clusters[i].setCentralValue(j, sum / total_points_cluster);
-                    }
-                }
-            }
-            */
 
             const double ERROR_THRESHHOLD = 0.01;
             typedef pair<int, int> task_t;
